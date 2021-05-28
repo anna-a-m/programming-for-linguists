@@ -9,7 +9,6 @@ import unittest
 from data_structures.stack.stack import Stack
 
 
-@unittest.skip('Stack is not implemented yet')
 class StackTestCase(unittest.TestCase):
     """
     This Case of tests checks the functionality of the implementation of Stack
@@ -64,7 +63,8 @@ class StackTestCase(unittest.TestCase):
         """
         stack = Stack()
         elements = (1, 2, "string", None, 0, Stack())
-        map(stack.push, elements)
+        for el in elements:
+            stack.push(el)
         self.assertEqual(stack.size(), len(elements))
         for index, element in enumerate(reversed(elements)):
             top = stack.top()
