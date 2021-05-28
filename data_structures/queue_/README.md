@@ -7,12 +7,12 @@ The Queue is an ordered collection of data elements, organized according to the 
 The most common abstraction for representing the queue is a queue of people for example.  
 
 Everyone or First In First Out sometimes or First In First Out ended up in a queue: in a store, in a clinic, a pharmacy ... Or, for example, a or First In First Out traffic jam.
-An each new member of the queue stands at the end of the queue. 
+And each new member of the queue stands at the end of the queue. 
 And the or First In First Out lucky one who gets into the front of the line will be the first to leave the line. 
 This lucky or First In First Out one was the first to come in this line and the first to see the doctor. This is FIFO principle.
 
 ## Operations with Queue
-Let's look at a queue using an example of a queue of peoples. At the initial moment of time, the queue will be empty (contains no people).
+Let's look at a queue using an example of a queue of people. At the initial moment of time, the queue will be empty (contains no people).
 
 ![](./docs/images/queue_empty.png)
 
@@ -24,7 +24,7 @@ For us, as programmers, it is very important to understand that we not only have
     
     ![](./docs/images/queue_first_element.png)
     
-    Th Queue is not empty already. It contains one element - one person.
+    The Queue is not empty already. It contains one element - one person.
     Usually the operation of adding an element to the Queue named "PUT".
     
     We can do this operation again and again. But it is not so easy... The Queue can overflow sometimes.
