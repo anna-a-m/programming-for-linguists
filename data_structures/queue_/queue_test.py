@@ -6,7 +6,7 @@ Tests for Queue class.
 
 import unittest
 
-from data_structures.queue_.queue_ import Queue_
+from data_structures.queue_.queue_ import QueueDS
 
 
 class QueueTestCase(unittest.TestCase):
@@ -19,7 +19,7 @@ class QueueTestCase(unittest.TestCase):
         Create an empty Queue.
         Test that its size is 0.
         """
-        queue = Queue_()
+        queue = QueueDS()
         self.assertTrue(queue.empty())
         self.assertEqual(queue.size(), 0)
 
@@ -28,7 +28,7 @@ class QueueTestCase(unittest.TestCase):
         Create an empty Queue with specified maximal size.
         Test that its size is 0.
         """
-        queue = Queue_(max_size=10)
+        queue = QueueDS(max_size=10)
         self.assertTrue(queue.empty())
         self.assertEqual(queue.size(), 0)
 
@@ -37,14 +37,14 @@ class QueueTestCase(unittest.TestCase):
         Create a Queue from an iterable object.
         Check that the size of queue_ equals to the size of the given tuple.
         """
-        data = (1, None, [], Queue_())
-        queue = Queue_(data=data)
+        data = (1, None, [], QueueDS())
+        queue = QueueDS(elements=data, priorities=[i for i in range(len(data))])
         self.assertFalse(queue.empty())
         self.assertEqual(queue.size(), len(data))
         self.assertFalse(queue.full())
-        for value in data:
+        for i, value in enumerate(data):
             test_value = queue.get()
-            self.assertEqual(test_value, value)
+            self.assertEqual(test_value, (value, i))
         self.assertTrue(queue.empty())
         self.assertEqual(queue.size(), 0)
 
@@ -52,14 +52,14 @@ class QueueTestCase(unittest.TestCase):
         """
         Create an empty Queue from the given data and put elements to queue_.
         """
-        data = (1, None, [], Queue_())
-        queue = Queue_(data=data, max_size=len(data) - 2)
+        data = (1, None, [], QueueDS())
+        queue = QueueDS(elements=data, priorities=[i for i in range(len(data))], max_size=len(data) - 2)
         self.assertFalse(queue.empty())
         self.assertEqual(queue.size(), len(data) - 2)
         self.assertTrue(queue.full())
-        for value in data[:-2]:
+        for i, value in enumerate(data[:-2]):
             test_value = queue.get()
-            self.assertEqual(test_value, value)
+            self.assertEqual(test_value, (value, i))
         self.assertTrue(queue.empty())
         self.assertEqual(queue.size(), 0)
 
@@ -68,7 +68,7 @@ class QueueTestCase(unittest.TestCase):
         Create an empty Queue.
         Test that call of get function raises Assertion error
         """
-        queue = Queue_()
+        queue = QueueDS()
         self.assertRaises(AssertionError, queue.get)
 
     def test_call_put_of_fully_queue_raised_error(self):
@@ -76,7 +76,7 @@ class QueueTestCase(unittest.TestCase):
         Create a Queue with maximum size=0.
         Test that call of put function raises Assertion error
         """
-        queue = Queue_(max_size=1)
+        queue = QueueDS(max_size=1)
         queue.put(0)
         self.assertRaises(AssertionError, queue.put, 1)
 
@@ -86,6 +86,6 @@ class QueueTestCase(unittest.TestCase):
         Test that call of full-function returns False
         """
         data = ()
-        queue = Queue_(data)
+        queue = QueueDS(data)
         self.assertFalse(queue.full())
         self.assertEqual(queue.capacity(), None)
