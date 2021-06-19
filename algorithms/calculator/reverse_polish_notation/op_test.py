@@ -9,7 +9,6 @@ from algorithms.calculator.reverse_polish_notation import OpFactory
 from algorithms.calculator.reverse_polish_notation.binary_op import Plus, Minus, Multiplier, Divider, Power
 
 
-@unittest.skip('There is not implementation of OperatorFactory yet')
 class OperatorCreationTestCase(unittest.TestCase):
     """
     Class with test cases for creating of operators

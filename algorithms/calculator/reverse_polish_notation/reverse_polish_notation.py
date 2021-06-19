@@ -5,24 +5,26 @@ Class for Reverse Polish Notation
 """
 
 from algorithms.calculator.reverse_polish_notation.element import Element
+from data_structures.queue_ import QueueDS
 
 
 class ReversePolishNotation:
     """
     Reverse Polish Notation class
 
-    It just a wrapper for Queue_.
+    It is just a wrapper for QueueDS.
     To add some interests for this class we add iterations using magic methods
     """
 
     def __init__(self):
-        self._expression_queue = None
+        self._expression_queue = QueueDS()
 
     def put(self, element: Element):
         """
         Put the element to the RPN
         :param element: element to put
         """
+        self._expression_queue.put(element)
 
     def __iter__(self):
         return self

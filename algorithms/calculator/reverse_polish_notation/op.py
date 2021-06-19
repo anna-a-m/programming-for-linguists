@@ -44,7 +44,7 @@ class OpMeta(type):
     """
     def __new__(cls, *args, **kwargs):
         """
-        Method to create a Operator class
+        Method to create an Operator class
         :param args:
         :param kwargs:
         """
@@ -79,7 +79,7 @@ class Op(Element, metaclass=OpMeta):
         return Digit(res)
 
     def __gt__(self, other: 'Op') -> bool:
-        pass
+        return self.priority > other.priority
 
     def __eq__(self, other: 'Op') -> bool:
-        pass
+        return self.priority == other.priority

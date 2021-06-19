@@ -13,7 +13,7 @@ class Stack:
     Stack Data Structure
     """
     # pylint: disable=missing-module-docstring
-    def __init__(self, data: Iterable = None, n_stop: int = 1):
+    def __init__(self, data: Iterable = None, n_stop: int = None):
         self.data = list(data) if data else []
         self.stop = n_stop
 
@@ -22,7 +22,9 @@ class Stack:
         Add the element ‘element’ at the top of stack
         :param element: element to add to stack
         """
-        if len(self.data) < self.stop:
+        if self.stop and len(self.data) < self.stop:
+            self.data.append(element)
+        elif self.stop is None:
             self.data.append(element)
         else:
             raise IndexError('The stack is full')
@@ -34,7 +36,7 @@ class Stack:
         if self.data:
             self.data.pop(-1)
         else:
-            raise ValueError
+            raise ValueError('Stack is empty')
 
     def top(self):
         """
@@ -44,7 +46,7 @@ class Stack:
         if self.data:
             return self.data[-1]
         else:
-            raise ValueError
+            raise ValueError('Stack is empty')
 
     def size(self) -> int:
         """
@@ -60,3 +62,17 @@ class Stack:
                  False if stack contains elements
         """
         return not bool(self.data)
+
+    def __iter__(self):
+        """
+        Implement iteration for Stack to make it empty
+        :return:
+        """
+        return self
+
+    def __next__(self):
+        if self.empty():
+            raise StopIteration
+        top = self.top()
+        self.pop()
+        return top

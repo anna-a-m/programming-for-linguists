@@ -89,7 +89,9 @@ class QueueDS:
     """
 
     # pylint: disable=unused-argument,missing-module-docstring
-    def __init__(self, elements: Iterable = (), priorities: Iterable = (), max_size: int = None):
+    def __init__(self, elements=(), priorities: Iterable = (), max_size: int = None):
+        if not priorities:
+            priorities = [0] * len(elements)
         self.data = _QueueConstructor(elements, priorities).create_queue()
         self.max_size = max_size
         if max_size is not None:
@@ -112,6 +114,15 @@ class QueueDS:
             raise AssertionError('queue is full')
 
     def get(self):
+        """
+        Remove and return an item from queue_
+        """
+        if self.data:
+            return self.data.pop(-1)[0]
+        else:
+            raise AssertionError('queue is empty')
+
+    def get_prioritized(self):
         """
         Remove and return an item from queue_
         """
@@ -149,6 +160,13 @@ class QueueDS:
         Return the first element in queue_
         :return: Item from queue_
         """
+        return self.data[-1][0]
+
+    def top_prioritized(self):
+        """
+        Return the first element in queue_
+        :return: Item from queue_
+        """
         return self.data[-1]
 
     # pylint: disable=no-self-use
@@ -168,7 +186,8 @@ if __name__ == '__main__':
                      max_size=3)
     # creating queue from str
     Q_str = QueueDS(elements='Doctor Who', priorities=[2, 0, 3, 3, 0, 1, 4, 1, 3, 0])
-    for Q in [Q_list, Q_dict, Q_str]:
+    Q_str_1 = QueueDS('(1-4)/3')
+    for Q in [Q_list, Q_dict, Q_str, Q_str_1]:
         for _ in range(Q.size()):
-            print(Q.get())
+            print(Q.get_prioritized())
         print()
